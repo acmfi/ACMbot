@@ -11,7 +11,7 @@ print("Running...")
 def send_welcome(message):
   bot.reply_to(message, "¡Hola! Te damos al bienvenida al bot de ACM.")
 
-@bot.message_handler(commands=['queHaceACM'])
+@bot.message_handler(commands=['quehaceacm'])
 def send_info(message):
   bot.reply_to(message, info)
     

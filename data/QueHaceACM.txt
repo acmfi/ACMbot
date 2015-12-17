@@ -1,1 +1,11 @@
-Hola que ase aseeme mola maso balesiok
+ACM Capítulo de Estudiantes es una de las representaciones
+estudiantiles de ACM.
+
+Llevamos organizando actividades dentro y fuera de la facultad desde
+1986, siendo uno de nuestros principales objetivos aplicar los
+propósitos culturales, educativos y científicos de ACM entre los
+estudiantes. Para ello, divulgamos de diferentes maneras el
+conocimiento informático, buscando siempre favorecer la formación
+complementaria del alumnado.
+
+acm.asoc.fi.upm.es
