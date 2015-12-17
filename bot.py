@@ -3,7 +3,7 @@ import telebot
 bot = telebot.TeleBot("92880306:AAHx-oybgswhlloA_hFxpBBvknBltoAyaV0")
 
 with open('./data/QueHaceACM.txt', 'r') as myfile:
-  info = myfile.read().replace('\n', '')
+  info = myfile.read()
 
 print("Running...")
 
