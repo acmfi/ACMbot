@@ -3,7 +3,7 @@ import telebot
 bot = telebot.TeleBot("92880306:AAHx-oybgswhlloA_hFxpBBvknBltoAyaV0")
 
 with open('./data/QueHaceACM.txt', 'r') as myfile:
-  info = myfile.read().replace('\n', '')
+  info = myfile.read()
 
 print("Running...")
 
@@ -13,6 +13,6 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['queHaceACM'])
 def send_info(message):
-  bot.send_message(message, info)
+  bot.reply_to(message, info)
     
 bot.polling()
