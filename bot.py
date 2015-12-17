@@ -13,6 +13,6 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['queHaceACM'])
 def send_info(message):
-  bot.reply_to(message, info)
+  bot.send_message(message, info)
     
 bot.polling()
