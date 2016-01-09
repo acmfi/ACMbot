@@ -2,7 +2,7 @@ import telebot
 import json
 from telebot import types
 
-bot = telebot.TeleBot("92880306:AAFmwCI80R60hhHRcGNDl8m7Z-Oz5e_GqXE")
+bot = telebot.TeleBot("")
 
 with open('./data/data.json', 'r') as data:
   j = json.load(data)
