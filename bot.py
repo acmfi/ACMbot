@@ -9,7 +9,9 @@ with open('./data/data.json', 'r') as data:
   info = j['info']
   welcome = j['bienvenida']
   leHelp = j['help']
-  
+  events = j['events']
+  reto = j['reto']
+
 print("Running...")
 
 @bot.message_handler(commands=['start'])
@@ -25,8 +27,21 @@ def send_info(message):
   bot.reply_to(message, info)
 
 @bot.message_handler(commands=['comida'])
-def send_precios(message):
+def send_prices(message):
   photo = open('./data/listaComida.jpg', 'rb')
   bot.send_photo(message.chat.id, photo)
-  
+
+@bot.message_handler(commands=['eventos'])
+def send_events(message):
+  if events == '':
+    GIF = open('./data/carlton.mp4', 'rb')
+    bot.send_message(message.chat.id, 'No hay eventos!')
+    bot.send_document(message.chat.id, GIF)
+  else:
+    bot.reply_to(message, events)
+
+@bot.message_handler(commands=['reto'])
+def send_challenge(message):
+  bot.reply_to(message, reto)  
+
 bot.polling()
