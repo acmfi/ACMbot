@@ -3,11 +3,11 @@
 Proyecto de la asociacion [[https://acm.asoc.fi.upm.es][ACM]] de la ETSIINF (FI) de la UPM para crear un bot.
 
 
-1. [[como-funciona][¿Cómo funciona?]]
-2. [[como-hacerlo-funcionar][¿Cómo hacerlo funcionar?]]
+1. [[./#cómo-funciona][¿Cómo funciona?]]
+2. [[./#cómo-hacerlo-funcionar][¿Cómo hacerlo funcionar?]]
 
 #+NAME: como-funciona
-** ¿Cómo fuciona?
+** ¿Cómo funciona?
 
 Lo primero que necesitarás es abrir una conversación con él, búscalo con el nombre @acmupm_bot
 
@@ -27,8 +27,13 @@ futuro nadie más podrá, solo el administrador.
 Si eres uno de los afortunados, necesitarás tener el TOKEN que el
 todopoderoso BotFather nos entregó (por tercera vez) guardado en un fichero llamado:
 
-      telegram_token
+telegram_token
 
 Pon el token en el fichero "telegram_token" en el mismo directorio que
-el bot y ejecútalo mediante "python bot.py" en una terminal. El bot se
-encarga del resto.
+el bot y ejecútalo mediante:
+
+#+BEGIN_SRC python
+python bot.py 
+#+END_SRC
+
+El bot se encarga del resto.
