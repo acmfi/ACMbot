@@ -1,8 +1,13 @@
+import sys
 import telebot
 import json
 from telebot import types
 
-bot = telebot.TeleBot("TOKEN")
+TOKEN = open('telegram_token', 'r')
+
+bot = telebot.TeleBot(TOKEN.read())
+
+TOKEN.close()
 
 with open('./data/data.json', 'r') as data:
   j = json.load(data)
