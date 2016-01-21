@@ -3,7 +3,7 @@ import telebot
 import json
 from telebot import types
 
-TOKEN = open('./token/acm.token', 'r')
+TOKEN = open('./acm.token', 'r')
 
 bot = telebot.TeleBot(TOKEN.read())
 
