@@ -1,3 +1,6 @@
+#TOKEN
+tokens/*.token
+
 # Emacs stuff #
 \#*\#
 *~
