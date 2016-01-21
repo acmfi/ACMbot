@@ -1,3 +1,39 @@
 * ACM UPM Telegram Bot
 
-Proyecto de la asociacion [[https://www.acm.asoc.fi.upm.es][ACM]] de la ETSIINF (FI) de la UPM para crear un bot.
+Proyecto de la asociacion [[https://acm.asoc.fi.upm.es][ACM]] de la ETSIINF (FI) de la UPM para crear un bot.
+
+
+1. [[./#cómo-funciona][¿Cómo funciona?]]
+2. [[./#cómo-hacerlo-funcionar][¿Cómo hacerlo funcionar?]]
+
+#+NAME: como-funciona
+** ¿Cómo funciona?
+
+Lo primero que necesitarás es abrir una conversación con él, búscalo con el nombre @acmupm_bot
+
+Lista de comandos:
+- /start :: Comienza el bot
+- /help :: Muestra los comandos disponibles
+- /quehaceacm :: ¡Conoce más sobre ACM UPM!
+- /comida :: Si quieres comer algo, necesitarás saber cuánto cuesta.
+
+
+#+NAME: como-hacerlo-funcionar
+** ¿Cómo hacerlo funcionar?
+
+Solo unos pocos elegidos de momento pueden ponerlo en marcha. En un
+futuro nadie más podrá, solo el administrador.  
+
+Si eres uno de los afortunados, necesitarás tener el TOKEN que el
+todopoderoso BotFather nos entregó (por tercera vez) guardado en un fichero llamado:
+
+telegram_token
+
+Pon el token en el fichero "telegram_token" en el mismo directorio que
+el bot y ejecútalo mediante:
+
+#+BEGIN_SRC python
+python bot.py 
+#+END_SRC
+
+El bot se encarga del resto.
