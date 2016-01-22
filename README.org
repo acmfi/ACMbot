@@ -3,8 +3,8 @@
 Proyecto de la asociacion [[https://acm.asoc.fi.upm.es][ACM]] de la ETSIINF (FI) de la UPM para crear un bot.
 
 
-1. [[./#cómo-funciona][¿Cómo funciona?]]
-2. [[./#cómo-hacerlo-funcionar][¿Cómo hacerlo funcionar?]]
+1. [[#cómo-funciona][¿Cómo funciona?]]
+2. [[#cómo-hacerlo-funcionar][¿Cómo hacerlo funcionar?]]
 
 #+NAME: como-funciona
 ** ¿Cómo funciona?
