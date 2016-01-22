@@ -3,7 +3,7 @@ import telebot
 import json
 from telebot import types
 
-TOKEN = open('telegram_token', 'r')
+TOKEN = open('./acm.token', 'r')
 
 bot = telebot.TeleBot(TOKEN.read())
 
@@ -48,5 +48,10 @@ def send_events(message):
 @bot.message_handler(commands=['reto'])
 def send_challenge(message):
   bot.reply_to(message, reto)  
+
+@bot.message_handler(commands=['lmgtfy'])
+def send_lmgtfy(message):
+  lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
+  bot.reply_to(message, lmgtfy_url)
 
 bot.polling()
