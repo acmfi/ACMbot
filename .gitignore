@@ -3,6 +3,8 @@
 *~
 .#*
 
+telegram_token
+
 # Python reglas #
 # Byte-compiled / optimized / DLL files
 __pycache__/
