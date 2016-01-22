@@ -3,11 +3,14 @@ import telebot
 import json
 from telebot import types
 
-TOKEN = open('./acm.token', 'r')
 
-bot = telebot.TeleBot(TOKEN.read())
-
-TOKEN.close()
+try: 
+  TOKEN = open('./acm.token', 'r')
+  bot = telebot.TeleBot(TOKEN.read())
+  TOKEN.close()
+except:
+  print("TOKEN Error")
+  raise SystemExit
 
 with open('./data/data.json', 'r') as data:
   j = json.load(data)
