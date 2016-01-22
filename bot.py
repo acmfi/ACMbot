@@ -54,4 +54,9 @@ def send_lmgtfy(message):
   lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
   bot.reply_to(message, lmgtfy_url)
 
+@bot.message_handler(commands=['tldr'])
+def send_tldr(message):
+  GIF = open('./data/tldr.mp4', 'rb')
+  bot.send_document(message.chat.id, GIF)
+
 bot.polling()
