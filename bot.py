@@ -3,11 +3,33 @@ import telebot
 import json
 from telebot import types
 
+def listener(messages):
+  # When new messages arrive TeleBot will call this function.
+    
+  for m in messages:
+    if m.content_type == 'text':
+      # Prints the sent message to the console
+      print ("Chat -> " + str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
+
+knownUsers = []
+userStep = {}
+
+def get_user_step(uid):
+    if uid in userStep:
+        return userStep[uid]
+    else:
+      knownUsers.append(uid)
+      userStep[uid] = 0
+      print ("Nuevo usuario que no ha usado \"/start\" todavia")
+      return 0
+
 TOKEN = open('./acm.token', 'r')
 
 bot = telebot.TeleBot(TOKEN.read())
 
 TOKEN.close()
+
+bot.set_update_listener(listener)
 
 with open('./data/data.json', 'r') as data:
   j = json.load(data)
@@ -16,6 +38,9 @@ with open('./data/data.json', 'r') as data:
   leHelp = j['help']
   events = j['events']
   reto = j['reto']
+  bebida = j['bebida']
+  comida = j['comida']
+  especiales = j['especiales']
 
 print("Running...")
 
@@ -31,10 +56,38 @@ def send_help(message):
 def send_info(message):
   bot.reply_to(message, info)
 
-@bot.message_handler(commands=['comida'])
+"""@bot.message_handler(commands=[''])
 def send_prices(message):
   photo = open('./data/listaComida.jpg', 'rb')
-  bot.send_photo(message.chat.id, photo)
+  bot.send_photo(message.chat.id, photo)"""
+
+seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+seleccionComida.add('Bebida','Especiales')
+seleccionComida.add('Comida','Todo')
+seleccionComida.add('Cerrar')
+
+@bot.message_handler(commands=['precios'])
+def send_precios_comida(message):
+  chatId = message.chat.id
+  bot.send_message(chatId, "Que precios quieres ver?", reply_markup=seleccionComida)
+  userStep[chatId] = 1 # Esperando una contestacion
+
+@bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 1)
+def msg_seleccion_precio(message):
+  chatId = message.chat.id
+  text = message.text
+
+  if text == 'Bebida':
+    bot.send_message(chatId, bebida)
+  elif text == 'Comida':
+    bot.send_message(chatId, comida)
+  elif text == 'Especiales':
+    bot.send_message(chatId, especiales)
+  elif text == 'Todo':
+    photo = open('./data/listaComida.jpg', 'rb')
+    bot.send_photo(message.chat.id, photo)
+  else:
+    bot.send_message(chatId, "#sexyACM")
 
 @bot.message_handler(commands=['eventos'])
 def send_events(message):

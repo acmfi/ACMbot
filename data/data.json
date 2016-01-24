@@ -2,4 +2,7 @@
  "bienvenida":"¡Hola! Te damos la bienvenida al bot de ACM.\n\nPuedes empezar diciendo /quehaceacm para conocernos un poco más o probar con /help para descubrir todo lo que este bot puede ofrecer.",
  "help":"Comandos:\n\n/help -> Muestra los comandos disponibles\n/start -> Comienza el bot\n/quehaceacm -> Muestra informacion sobre ACM\n/comida -> Muestra la lista de precios de la comida que se puede comprar en ACM",
  "events":"",
- "reto":"El reto de esta semana es:\n\nhttps://redd.it/3yiy2d"}
+ "reto":"El reto de esta semana es:\n\nhttps://redd.it/3yiy2d",
+ "bebida":"- Agua 50cl -> 0.50€\n- Coca Cola -> 0.60€\n- Nestea Limon -> 0.60€\n- Fanta Naranja -> 0.60€\n- Bebida Energética -> 0.60€\n- Aquarius -> 0.70€",
+ "comida":"- Palomitas Sal -> 0.40€\n- Palomitas Mantequilla -> 0.60€\n- Palomitas Dulces -> 0.70€\n- Kit kat -> 0.40€\n- Kinder Bueno -> 1.00€\n- Donuts -> 0.60€\n- Picotas -> 0.05€\n- Regaliz -> 0.05€\n- Oreo -> 0.50€\n- Ensaimadas -> 0.20€\n- Croisants -> 0.20€\n- Conchas -> 0.25€\n- Patatas -> 1.00€\n- Chips Ahoy -> 0.50€\n- Dinosaurios -> 0.30€\n- Dinosaurios choco -> 0.40€",
+ "especiales":"- Pizza congelada -> 3.00€\n- Pizza fresca -> 3.00€\n- Café (sin vaso ni cucharilla) -> 0.50€\n- Café (con vaso y cucharilla) -> 0.65€"}
