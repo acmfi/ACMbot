@@ -5,11 +5,13 @@ from telebot import types
 
 def listener(messages):
   # When new messages arrive TeleBot will call this function.
-    
   for m in messages:
     if m.content_type == 'text':
       # Prints the sent message to the console
-      print ("Chat -> " + str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
+      if m.chat.type == 'private':
+       print ("Chat -> " + str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
+      else:
+       print ("Chat -> " + str(m.chat.title) + " [" + str(m.chat.id) + "]: " + m.text)
 
 knownUsers = []
 userStep = {}
@@ -23,13 +25,8 @@ def get_user_step(uid):
       print ("Nuevo usuario que no ha usado \"/start\" todavia")
       return 0
 
-try: 
-  TOKEN = open('./acm.token', 'r')
+with open ("./acm.token","r") as TOKEN:
   bot = telebot.TeleBot(TOKEN.read())
-  TOKEN.close()
-except:
-  print("TOKEN Error")
-  raise SystemExit
 
 bot.set_update_listener(listener) # Este es el listener
 
