@@ -55,12 +55,7 @@ def send_help(message):
 def send_info(message):
   bot.reply_to(message, info)
 
-"""@bot.message_handler(commands=[''])
-def send_prices(message):
-  photo = open('./data/listaComida.jpg', 'rb')
-  bot.send_photo(message.chat.id, photo)"""
-
-seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True, selective=False)
+seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True)
 seleccionComida.add('Bebida','Especiales')
 seleccionComida.add('Comida','Todo')
 seleccionComida.add('Cerrar')
