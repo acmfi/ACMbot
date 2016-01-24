@@ -60,10 +60,12 @@ def send_prices(message):
   photo = open('./data/listaComida.jpg', 'rb')
   bot.send_photo(message.chat.id, photo)"""
 
-seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True, selective=True)
+seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True, selective=False)
 seleccionComida.add('Bebida','Especiales')
 seleccionComida.add('Comida','Todo')
 seleccionComida.add('Cerrar')
+
+hideBoard = types.ReplyKeyboardHide()
 
 @bot.message_handler(commands=['precios'])
 def send_precios_comida(message):
@@ -77,16 +79,16 @@ def msg_seleccion_precio(message):
   text = message.text
 
   if text == 'Bebida':
-    bot.send_message(chatId, bebida)
+    bot.send_message(chatId, bebida, reply_markup=hideBoard)
   elif text == 'Comida':
-    bot.send_message(chatId, comida)
+    bot.send_message(chatId, comida, reply_markup=hideBoard)
   elif text == 'Especiales':
-    bot.send_message(chatId, especiales)
+    bot.send_message(chatId, especiales, reply_markup=hideBoard)
   elif text == 'Todo':
     photo = open('./data/listaComida.jpg', 'rb')
-    bot.send_photo(message.chat.id, photo)
+    bot.send_photo(message.chat.id, photo, reply_markup=hideBoard)
   else:
-    bot.send_message(chatId, "#sexyACM")
+    bot.send_message(chatId, "#sexyACM", reply_markup=hideBoard)
 
 @bot.message_handler(commands=['eventos'])
 def send_events(message):
@@ -103,8 +105,14 @@ def send_challenge(message):
 
 @bot.message_handler(commands=['lmgtfy'])
 def send_lmgtfy(message):
-  lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
-  bot.reply_to(message, lmgtfy_url)
+  if(message.text == ""):
+    markup = types.ForceReply(selective=True)
+    bot.send_message(message.chat.id, "Que quieres que busque por ti?", reply_markup=markup)
+    bot.register_next_step_handler(msg)
+    lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(msg.text.split()[1:])
+  else:
+    lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
+    bot.reply_to(message, lmgtfy_url)
 
 @bot.message_handler(commands=['tldr'])
 def send_tldr(message):
