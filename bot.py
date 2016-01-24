@@ -23,13 +23,15 @@ def get_user_step(uid):
       print ("Nuevo usuario que no ha usado \"/start\" todavia")
       return 0
 
-TOKEN = open('./acm.token', 'r')
+try: 
+  TOKEN = open('./acm.token', 'r')
+  bot = telebot.TeleBot(TOKEN.read())
+  TOKEN.close()
+except:
+  print("TOKEN Error")
+  raise SystemExit
 
-bot = telebot.TeleBot(TOKEN.read())
-
-TOKEN.close()
-
-bot.set_update_listener(listener)
+bot.set_update_listener(listener) # Este es el listener
 
 with open('./data/data.json', 'r') as data:
   j = json.load(data)
