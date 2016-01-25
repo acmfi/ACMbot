@@ -11,7 +11,7 @@ def listener(messages):
       if m.chat.type == 'private':
        print ("Chat -> " + str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
       else:
-       print ("Chat -> " + str(m.chat.title) + " [" + str(m.chat.id) + "]: " + m.text)
+       print ("Group -> " + str(m.chat.title) + " [" + str(m.chat.id) + "]: " + m.text)
 
 knownUsers = []
 userStep = {}
@@ -100,14 +100,19 @@ def send_challenge(message):
 
 @bot.message_handler(commands=['lmgtfy'])
 def send_lmgtfy(message):
-  if(message.text == ""):
-    markup = types.ForceReply(selective=True)
+  if(message.text == '/lmgtfy' or message.text == '/lmgtfy@acmupm_bot'):
+    markup = types.ForceReply()
     bot.send_message(message.chat.id, "Que quieres que busque por ti?", reply_markup=markup)
-    bot.register_next_step_handler(msg)
-    lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(msg.text.split()[1:])
+    userStep[message.chat.id] = 2
+
   else:
     lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
     bot.reply_to(message, lmgtfy_url)
+
+@bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 2)
+def msg_que_buscar(message):
+  lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[0:])
+  bot.send_message(message.chat.id, lmgtfy_url)
 
 @bot.message_handler(commands=['tldr'])
 def send_tldr(message):
