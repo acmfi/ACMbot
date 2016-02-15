@@ -3,18 +3,22 @@ import telebot
 import json
 from telebot import types
 
+# Create bot with its token
+
+with open ("./acm.token","r") as TOKEN:
+  bot = telebot.TeleBot(TOKEN.read())
+
+#Functions used
+
 def listener(messages):
   # When new messages arrive TeleBot will call this function.
   for m in messages:
     if m.content_type == 'text':
       # Prints the sent message to the console
       if m.chat.type == 'private':
-       print ("Chat -> " + str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
+        print ("Chat -> " + str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
       else:
-       print ("Group -> " + str(m.chat.title) + " [" + str(m.chat.id) + "]: " + m.text)
-
-knownUsers = []
-userStep = {}
+        print ("Group -> " + str(m.chat.title) + " [" + str(m.chat.id) + "]: " + m.text)
 
 def get_user_step(uid):
     if uid in userStep:
@@ -25,10 +29,11 @@ def get_user_step(uid):
       print ("Nuevo usuario que no ha usado \"/start\" todavia")
       return 0
 
-with open ("./acm.token","r") as TOKEN:
-  bot = telebot.TeleBot(TOKEN.read())
+# Initializing listener
 
-bot.set_update_listener(listener) # Este es el listener
+bot.set_update_listener(listener) 
+
+# Files used
 
 with open('./data/data.json', 'r') as data:
   j = json.load(data)
@@ -43,6 +48,17 @@ with open('./data/data.json', 'r') as data:
 
 print("Running...")
 
+# Custom keyboards
+
+seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+seleccionComida.add('Bebida','Especiales')
+seleccionComida.add('Comida','Todo')
+seleccionComida.add('Cerrar')
+
+hideBoard = types.ReplyKeyboardHide()
+
+# Handlers
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
   bot.reply_to(message, welcome)
@@ -54,13 +70,6 @@ def send_help(message):
 @bot.message_handler(commands=['quehaceacm'])
 def send_info(message):
   bot.reply_to(message, info)
-
-seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-seleccionComida.add('Bebida','Especiales')
-seleccionComida.add('Comida','Todo')
-seleccionComida.add('Cerrar')
-
-hideBoard = types.ReplyKeyboardHide()
 
 @bot.message_handler(commands=['precios'])
 def send_precios_comida(message):
