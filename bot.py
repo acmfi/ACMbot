@@ -28,9 +28,8 @@ def get_user_step(uid):
       userStep[uid] = 0
       print ("Nuevo usuario que no ha usado \"/start\" todavia")
       return 0
-
+    
 # Initializing listener
-
 bot.set_update_listener(listener) 
 
 # Files used
@@ -77,22 +76,22 @@ def send_precios_comida(message):
   bot.send_message(chatId, "Que precios quieres ver?", reply_markup=seleccionComida)
   userStep[chatId] = 1 # Esperando una contestacion
 
-@bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 1)
-def msg_seleccion_precio(message):
-  chatId = message.chat.id
-  text = message.text
-
-  if text == 'Bebida':
-    bot.send_message(chatId, bebida, reply_markup=hideBoard)
-  elif text == 'Comida':
-    bot.send_message(chatId, comida, reply_markup=hideBoard)
-  elif text == 'Especiales':
-    bot.send_message(chatId, especiales, reply_markup=hideBoard)
-  elif text == 'Todo':
-    photo = open('./data/listaComida.jpg', 'rb')
-    bot.send_photo(message.chat.id, photo, reply_markup=hideBoard)
-  else:
-    bot.send_message(chatId, "#sexyACM", reply_markup=hideBoard)
+#@bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 1)
+#def msg_seleccion_precio(message):
+#  chatId = message.chat.id
+#  text = message.text
+#
+#  if text == 'Bebida':
+#    bot.send_message(chatId, bebida, reply_markup=hideBoard)
+#  elif text == 'Comida':
+#    bot.send_message(chatId, comida, reply_markup=hideBoard)
+#  elif text == 'Especiales':
+#    bot.send_message(chatId, especiales, reply_markup=hideBoard)
+#  elif text == 'Todo':
+#    photo = open('./data/listaComida.jpg', 'rb')
+#    bot.send_photo(message.chat.id, photo, reply_markup=hideBoard)
+#  else:
+#    bot.send_message(chatId, "#sexyACM", reply_markup=hideBoard)
 
 @bot.message_handler(commands=['eventos'])
 def send_events(message):
@@ -109,19 +108,13 @@ def send_challenge(message):
 
 @bot.message_handler(commands=['lmgtfy'])
 def send_lmgtfy(message):
-  if(message.text == '/lmgtfy' or message.text == '/lmgtfy@acmupm_bot'):
-    markup = types.ForceReply()
-    bot.send_message(message.chat.id, "Que quieres que busque por ti?", reply_markup=markup)
-    userStep[message.chat.id] = 2
+ lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
+ bot.reply_to(message, lmgtfy_url)
 
-  else:
-    lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
-    bot.reply_to(message, lmgtfy_url)
-
-@bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 2)
-def msg_que_buscar(message):
-  lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[0:])
-  bot.send_message(message.chat.id, lmgtfy_url)
+# @bot.message_handler(func=lambda message: get_user_step(message.chat.id) == 2)
+# def msg_que_buscar(message):
+#   lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[0:])
+#   bot.send_message(message.chat.id, lmgtfy_url)
 
 @bot.message_handler(commands=['tldr'])
 def send_tldr(message):
