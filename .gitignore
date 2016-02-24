@@ -1,5 +1,9 @@
-#TOKEN
+# TOKEN #
 *.token
+
+# Sensitive info #
+.twitter.json
+admins.json
 
 # Emacs stuff #
 \#*\#
