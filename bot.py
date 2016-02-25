@@ -1,7 +1,7 @@
 import sys
 import telebot
 import json
-from TwitterAPI import TwitterAPI
+#from TwitterAPI import TwitterAPI
 from telebot import types
 
 # Create bot with its token
@@ -10,12 +10,12 @@ with open ("./acm.token","r") as TOKEN:
   bot = telebot.TeleBot(TOKEN.read())
 
 # Authenticate on Twitter (@acmupm)
-with open ("./data/.twitter.json") as twitter:
-  t = json.load(twitter)
-  consumerKey = t['ConsumerK']
-  consumerSecret = t['ConsumerS']
-  accessToken = t['AccessT']
-  accessSecret = t['AccessS']
+#with open ("./data/.twitter.json") as twitter:
+#  t = json.load(twitter)
+#  consumerKey = t['ConsumerK']
+#  consumerSecret = t['ConsumerS']
+#  accessToken = t['AccessT']
+#  accessSecret = t['AccessS']
 
 # Vars used
 preciosTracking = {}
@@ -42,7 +42,7 @@ def listener(messages):
 bot.set_update_listener(listener) 
 
 # Twitter login
-api = TwitterAPI(consumerKey, consumerSecret, accessToken, accessSecret)
+#api = TwitterAPI(consumerKey, consumerSecret, accessToken, accessSecret)
 
 # Files used
 with open('./data/data.json', 'r') as data:
@@ -147,17 +147,17 @@ def send_tldr(message):
   GIF = open('./data/tldr.mp4', 'rb')
   bot.send_document(message.chat.id, GIF)
 
-@bot.message_handler(commands=['spam'])
-def send_spam(message):
-  if message.chat.type == 'private':
-    if str(message.from_user.id) in admins.keys():
-      text = message.text.split(' ', 1)[1]      
-      bot.send_message("@theIronChannel", text)
-      r = api.request('statuses/update', {'status': text})
-      print(r.status_code)
-    else:
-      bot.reply_to(message, "No eres un admin")
-  else:
-    bot.reply_to(message, "El spam solo se puede enviar por chat privado")
+#@bot.message_handler(commands=['spam'])
+#def send_spam(message):
+#  if message.chat.type == 'private':
+#    if str(message.from_user.id) in admins.keys():
+#      text = message.text.split(' ', 1)[1]      
+#      bot.send_message("@theIronChannel", text)
+#      r = api.request('statuses/update', {'status': text})
+#      print(r.status_code)
+#    else:
+#      bot.reply_to(message, "No eres un admin")
+#  else:
+#    bot.reply_to(message, "El spam solo se puede enviar por chat privado")
 
 bot.polling()
