@@ -7,7 +7,7 @@ from telebot import types
 # Create bot with its token
 
 with open ("./acm.token","r") as TOKEN:
-  bot = telebot.TeleBot(TOKEN.read())
+  bot = telebot.TeleBot(TOKEN.readline().strip())
 
 # Authenticate on Twitter (@acmupm)
 #with open ("./data/.twitter.json") as twitter:
