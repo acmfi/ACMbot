@@ -10,6 +10,9 @@ from telebot import types
 with open ("./acm.token","r") as TOKEN:
   bot = telebot.TeleBot(TOKEN.readline().strip())
 
+# Ignorar mensajes antiguos
+bot.skip_pending = True
+
 # Authenticate on Twitter (@acmupm)
 #with open ("./data/.twitter.json") as twitter:
 #  t = json.load(twitter)
@@ -151,11 +154,10 @@ def send_tldr(message):
 @bot.message_handler(commands=['update'])
 def auto_update(message):
   if message.chat.type == 'private':
-    userID = message.from_user_id
-    if str(userID) in admins.key():
-      if message.text.split()[1:] == admins[userID]:
-        bot.reply_to(message, "Reiniciando..\n\nPrueba algun comando en 10 segundos")
-        exit()
+    userID = message.from_user.id
+    if str(userID) in admins.keys():
+      bot.reply_to(message, "Reiniciando..\n\nPrueba algun comando en 10 segundos")
+      exit()
   else:
     bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
 
