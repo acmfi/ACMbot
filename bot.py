@@ -1,6 +1,7 @@
 import sys
 import telebot
 import json
+import subprocess as sub
 #from TwitterAPI import TwitterAPI
 from telebot import types
 
@@ -146,6 +147,16 @@ def send_lmgtfyExtended(message):
 def send_tldr(message):
   GIF = open('./data/tldr.mp4', 'rb')
   bot.send_document(message.chat.id, GIF)
+
+@bot.message_handler(commands=['update'])
+def auto_update(message):
+  if message.chat.type == 'private':
+    userID = message.from_user_id
+    if str(userID) in admins.key():
+      if message.text.split()[1:] == admins[userID]:
+        exit()
+  else:
+    bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
 
 #@bot.message_handler(commands=['spam'])
 #def send_spam(message):
