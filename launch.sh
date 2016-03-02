@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true; do
-    gip pull
+    git pull
     python bot.py
     sleep 5
 done
