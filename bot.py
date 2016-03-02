@@ -154,6 +154,7 @@ def auto_update(message):
     userID = message.from_user_id
     if str(userID) in admins.key():
       if message.text.split()[1:] == admins[userID]:
+        bot.reply_to(message, "Reiniciando..\n\nPrueba algun comando en 10 segundos")
         exit()
   else:
     bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
