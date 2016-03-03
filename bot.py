@@ -26,6 +26,13 @@ preciosTracking = {}
 lmgtfyTracking = {}
 
 # Functions used
+def isAdmin_fromPrivate(message):
+  if message.chat.type == 'private':
+    userID = message.from_user.id
+    if str(userID) in admins.keys():
+      return True
+  return False
+
 def isUserAnswer(user, userTracking):
   if user in userTracking.keys():
     return True
@@ -77,7 +84,6 @@ lmgtfySearch.add('Cancelar')
 hideBoard = types.ReplyKeyboardHide()
 
 # Handlers
-
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
   bot.reply_to(message, welcome)
@@ -125,7 +131,7 @@ def send_events(message):
 
 @bot.message_handler(commands=['reto'])
 def send_challenge(message):
-  bot.reply_to(message, reto)
+  bot.reply_to(message, "El reto de esta semana es:\n\n" + reto)
 
 @bot.message_handler(commands=['lmgtfy'])
 def send_lmgtfy(message):
@@ -151,15 +157,31 @@ def send_tldr(message):
   GIF = open('./data/tldr.mp4', 'rb')
   bot.send_document(message.chat.id, GIF)
 
+# Only admins!!
 @bot.message_handler(commands=['update'])
 def auto_update(message):
-  if message.chat.type == 'private':
-    userID = message.from_user.id
-    if str(userID) in admins.keys():
-      bot.reply_to(message, "Reiniciando..\n\nPrueba algun comando en 10 segundos")
-      sys.exit()
+ if isAdmin_fromPrivate(message):
+   bot.reply_to(message, "Reiniciando..\n\nPrueba algun comando en 10 segundos")
+   print("Updating..")
+   sys.exit()
+ else:
+   bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
+
+@bot.message_handler(commands=['newreto'])
+def new_challenge(message):
+  if isAdmin_fromPrivate(message):
+    url_reto = message.text.split(' ', 1)[1]
+    j['reto'] = url_reto
+    
+    with open('./data/data.json', 'w') as dataW:
+      dataW.write(json.dumps(j))
+      
+    bot.reply_to(message, "El nuevo reto es:\n\n" + url_reto)
+    print("Updating..")
+    sys.exit()
   else:
     bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
+
 
 #@bot.message_handler(commands=['spam'])
 #def send_spam(message):
