@@ -71,7 +71,7 @@ with open('./data/help.json', 'r') as leHelp:
 
 helpMessage = "Estos son los comandos disponibles:\n\n"
 for key in helpData:
-  helpMessage += "/" + key + " :: "
+  helpMessage += "- /" + key + " :: "
   helpMessage += helpData[key] + "\n"
 
 with open('./data/admins.json', 'r') as adminData:
