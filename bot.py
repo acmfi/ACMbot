@@ -69,7 +69,7 @@ with open('./data/data.json', 'r') as data:
 with open('./data/help.json', 'r') as leHelp:
   helpData = json.load(leHelp)
 
-helpMessage = ""
+helpMessage = "Estos son los comandos disponibles:\n\n"
 for key in helpData:
   helpMessage += "/" + key + " :: "
   helpMessage += helpData[key] + "\n"
