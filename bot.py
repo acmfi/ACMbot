@@ -60,12 +60,19 @@ with open('./data/data.json', 'r') as data:
   j = json.load(data)
   info = j['info']
   welcome = j['bienvenida']
-  leHelp = j['help']
   events = j['events']
   reto = j['reto']
   bebida = j['bebida']
   comida = j['comida']
   especiales = j['especiales']
+
+with open('./data/help.json', 'r') as leHelp:
+  helpData = json.load(leHelp)
+
+helpMessage = ""
+for key in helpData:
+  helpMessage += "/" + key + " :: "
+  helpMessage += helpData[key] + "\n"
 
 with open('./data/admins.json', 'r') as adminData:
   admins = json.load(adminData)
@@ -90,7 +97,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-  bot.reply_to(message, leHelp)
+  bot.reply_to(message, helpMessage)
 
 @bot.message_handler(commands=['quehaceacm'])
 def send_info(message):
