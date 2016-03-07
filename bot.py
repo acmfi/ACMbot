@@ -29,7 +29,7 @@ lmgtfyTracking = {}
 def isAdmin_fromPrivate(message):
   if message.chat.type == 'private':
     userID = message.from_user.id
-    if str(userID) in admins.keys():
+    if str(userID) in admins:
       return True
   return False
 
