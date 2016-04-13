@@ -3,8 +3,13 @@ import telebot
 import json
 # from TwitterAPI import TwitterAPI
 from telebot import types
+import os.path as path
 
 # Create bot with its token
+if not path.isfile("acm.token"):
+    print("Error: \"acm.token\" not found!")
+    sys.exit()
+
 with open("./acm.token", "r") as TOKEN:
     bot = telebot.TeleBot(TOKEN.readline().strip())
 
@@ -60,15 +65,32 @@ bot.set_update_listener(listener)
 # api = TwitterAPI(consumerKey, consumerSecret, accessToken, accessSecret)
 
 # Files used
+if not path.isfile("./data/data.json"):
+    with open('./data/data.json', 'w') as data:
+        data.write('{}')
+        data.close
+
 with open('./data/data.json', 'r') as data:
     j = json.load(data)
+    global info
     info = j['info']
+    global welcome
     welcome = j['bienvenida']
+    global events
     events = j['events']
+    global reto
     reto = j['reto']
+    global bebida
     bebida = j['bebida']
+    global comida
     comida = j['comida']
+    global especiales
     especiales = j['especiales']
+
+if not path.isfile("./data/help.json"):
+    with open('./data/help.json', 'w') as leHelp:
+        leHelp.write('{}')
+        leHelp.close
 
 with open('./data/help.json', 'r') as leHelp:
     helpData = json.load(leHelp)
@@ -77,6 +99,11 @@ helpMessage = "Estos son los comandos disponibles:\n\n"
 for key in helpData:
     helpMessage += "- /" + key + " :: "
     helpMessage += helpData[key] + "\n"
+
+if not path.isfile("./data/admins.json"):
+    with open('./data/admins.json', 'w') as adminData:
+        adminData.write('{}')
+        adminData.close
 
 with open('./data/admins.json', 'r') as adminData:
     admins = json.load(adminData)
@@ -203,22 +230,26 @@ def new_challenge(message):
             dataW.write(json.dumps(j))
         bot.reply_to(message, "El nuevo reto es:\n\n" + url_reto)
         print("Updating..")
-        sys.exit()
+        with open('./data/data.json', 'r') as data:
+            j2 = json.load(data)
+            global reto
+            reto = j2['reto']
+        print("Updated")
     else:
         bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
 
 
-#@bot.message_handler(commands=['spam'])
-#def send_spam(message):
-#  if message.chat.type == 'private':
-#    if str(message.from_user.id) in admins.keys():
-#      text = message.text.split(' ', 1)[1]
-#      bot.send_message("@theIronChannel", text)
-#      r = api.request('statuses/update', {'status': text})
-#      print(r.status_code)
-#    else:
-#      bot.reply_to(message, "No eres un admin")
-#  else:
-#    bot.reply_to(message, "El spam solo se puede enviar por chat privado")
+# @bot.message_handler(commands=['spam'])
+# def send_spam(message):
+#   if message.chat.type == 'private':
+#     if str(message.from_user.id) in admins.keys():
+#       text = message.text.split(' ', 1)[1]
+#       bot.send_message("@theIronChannel", text)
+#       r = api.request('statuses/update', {'status': text})
+#       print(r.status_code)
+#     else:
+#       bot.reply_to(message, "No eres un admin")
+#   else:
+#     bot.reply_to(message, "El spam solo se puede enviar por chat privado")
 
 bot.polling()
