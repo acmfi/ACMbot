@@ -46,7 +46,7 @@ todopoderoso BotFather nos entregó ((por tercera vez)*)** guardado en un ficher
 
 Pon el token en el fichero "acm.token" en el mismo directorio que
 el bot y ejecútalo con *run.sh*. Probablemente el fichero no tenga permisos de ejecución
-para darselos y ejecutarlo haz: 
+para darselos y ejecutarlo haz:
 
 #+BEGIN_SRC bash
   $ chmod +x run.sh
