@@ -28,7 +28,7 @@ Lista de comandos para ADMINISTRADORES:
 Estos comandos solo estarán disponibles para los usuarios de Telegram añadidos al archivo *admins.json* con el formato:
 
 #+BEGIN_EXAMPLE
-["123456789"]
+["123456789", "987654321"]
 #+END_EXAMPLE
 
 Siendo *123456789* el identificador del administrador en Telegram
@@ -42,13 +42,15 @@ futuro nadie más podrá, solo el administrador.
 Si eres uno de los afortunados, necesitarás tener el TOKEN que el
 todopoderoso BotFather nos entregó ((por tercera vez)*)** guardado en un fichero llamado:
 
-acm.token
+*acm.token*
 
 Pon el token en el fichero "acm.token" en el mismo directorio que
-el bot y ejecútalo mediante:
+el bot y ejecútalo con *run.sh*. Probablemente el fichero no tenga permisos de ejecución
+para darselos y ejecutarlo haz: 
 
 #+BEGIN_SRC bash
-python bot.py 
+  $ chmod +x run.sh
+  $ ./run.sh
 #+END_SRC
 
 El bot se encarga del resto.
