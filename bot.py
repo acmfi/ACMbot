@@ -112,12 +112,8 @@ print("Running...")
 
 # Custom keyboards
 seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-seleccionComida.add('Bebida', 'Especiales')
-seleccionComida.add('Comida', 'Todo')
-seleccionComida.add('Cerrar')
 
 lmgtfySearch = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-lmgtfySearch.add('Cancelar')
 
 hideBoard = types.ReplyKeyboardHide()
 
@@ -207,6 +203,16 @@ def send_lmgtfyExtended(message):
 def send_tldr(message):
     GIF = open('./data/tldr.mp4', 'rb')
     bot.send_document(message.chat.id, GIF)
+
+# Inline handler
+
+
+@bot.inline_handler(lambda query: query.query.lower() == 'precios')
+def precios_inline(iq):
+    r_comida = types.InlineQueryResultArticle('1', 'Comida', types.InputTextMessageContent(comida))
+    r_bebida = types.InlineQueryResultArticle('2', 'Bebida', types.InputTextMessageContent(bebida))
+    r_especiales = types.InlineQueryResultArticle('3', 'Especiales', types.InputTextMessageContent(especiales))
+    bot.answer_inline_query(iq.id, [r_comida, r_bebida, r_especiales])
 
 # Only admins!!
 
