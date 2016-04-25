@@ -36,7 +36,7 @@ def isAdmin_fromPrivate(message):
         userID = message.from_user.id
         if str(userID) in admins:
             return True
-        return False
+    return False
 
 
 def isUserAnswer(user, userTracking):
