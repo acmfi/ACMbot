@@ -1,6 +1,7 @@
 import sys
 import telebot
 import json
+import tweepy
 # from TwitterAPI import TwitterAPI
 from telebot import types
 import os.path as path
@@ -17,12 +18,15 @@ with open("./acm.token", "r") as TOKEN:
 bot.skip_pending = True
 
 # Authenticate on Twitter (@acmupm)
-# with open ("./data/.twitter.json") as twitter:
-#   t = json.load(twitter)
-#   consumerKey = t['ConsumerK']
-#   consumerSecret = t['ConsumerS']
-#   accessToken = t['AccessT']
-#   accessSecret = t['AccessS']
+with open ("./data/.twitter.json") as twitter:
+    t = json.load(twitter)
+    consumerKey = t['ConsumerK']
+    consumerSecret = t['ConsumerS']
+    accessToken = t['AccessT']
+    accessSecret = t['AccessS']
+    auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
+    auth.set_access_token(accessToken, accessSecret)
+
 
 # Vars used
 preciosTracking = {}
@@ -62,7 +66,7 @@ def listener(messages):
 bot.set_update_listener(listener)
 
 # Twitter login
-# api = TwitterAPI(consumerKey, consumerSecret, accessToken, accessSecret)
+api = tweepy.API(auth)
 
 # Files used
 if not path.isfile("./data/data.json"):
