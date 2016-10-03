@@ -24,10 +24,6 @@ bot.skip_pending = True
 #   accessToken = t['AccessT']
 #   accessSecret = t['AccessS']
 
-# Vars used
-preciosTracking = {}
-lmgtfyTracking = {}
-
 # Functions used
 
 
@@ -87,6 +83,15 @@ with open('./data/data.json', 'r') as data:
     global especiales
     especiales = j['especiales']
 
+if not path.isfile("./data/groups.json"):
+    with open("./data/groups.json", "w") as groups:
+        groups.write("{}")
+        groups.close
+
+with open('./data/groups.json', 'r') as groups:
+    global groupsData
+    groupsData = json.load(groups)
+    
 if not path.isfile("./data/help.json"):
     with open('./data/help.json', 'w') as leHelp:
         leHelp.write('{}')
@@ -110,13 +115,6 @@ with open('./data/admins.json', 'r') as adminData:
 
 print("Running...")
 
-# Custom keyboards
-seleccionComida = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-
-lmgtfySearch = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-
-hideBoard = types.ReplyKeyboardHide()
-
 # Handlers
 
 
@@ -133,33 +131,6 @@ def send_help(message):
 @bot.message_handler(commands=['quehaceacm'])
 def send_info(message):
     bot.reply_to(message, info)
-
-
-@bot.message_handler(commands=['precios'])
-def send_precios_comida(message):
-    chatId = message.chat.id
-    bot.send_message(chatId, "Que precios quieres ver?",
-                     reply_markup=seleccionComida)
-    preciosTracking[message.from_user.id] = message.chat.first_name
-
-
-@bot.message_handler(func=lambda message: isUserAnswer(message.from_user.id, preciosTracking))
-def msg_seleccion_precio(message):
-    chatId = message.chat.id
-    text = message.text
-    if text == 'Bebida':
-        bot.send_message(chatId, bebida, reply_markup=hideBoard)
-    elif text == 'Comida':
-        bot.send_message(chatId, comida, reply_markup=hideBoard)
-    elif text == 'Especiales':
-        bot.send_message(chatId, especiales, reply_markup=hideBoard)
-    elif text == 'Todo':
-        photo = open('./data/listaComida.jpg', 'rb')
-        bot.send_photo(message.chat.id, photo, reply_markup=hideBoard)
-    else:
-        bot.send_message(chatId, "#sexyACM", reply_markup=hideBoard)
-
-    preciosTracking.pop(message.from_user.id, None)
 
 
 @bot.message_handler(commands=['eventos'])
@@ -179,24 +150,8 @@ def send_challenge(message):
 
 @bot.message_handler(commands=['lmgtfy'])
 def send_lmgtfy(message):
-    if message.text == "/lmgtfy" or message.text == "/lmgtfy@acmupm_bot":
-        bot.send_message(message.chat.id, "Que quieres que busque por ti?",
-                         reply_markup=lmgtfySearch)
-        lmgtfyTracking[message.from_user.id] = message.chat.first_name
-    else:
-        lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split()[1:])
-        bot.reply_to(message, lmgtfy_url)
-
-
-@bot.message_handler(func=lambda message: isUserAnswer(message.from_user.id, lmgtfyTracking))
-def send_lmgtfyExtended(message):
-    if message.text == 'Cancelar':
-        bot.send_message(message.chat.id, "#sexyACM", reply_markup=hideBoard)
-    else:
-        lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split())
-        bot.reply_to(message, lmgtfy_url, reply_markup=hideBoard)
-
-    lmgtfyTracking.pop(message.from_user.id, None)
+    lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split())
+    bot.reply_to(message, lmgtfy_url)
 
 
 @bot.message_handler(commands=['tldr'])
@@ -245,6 +200,16 @@ def new_challenge(message):
         bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
 
 
+@bot.message_handler(commands=['acmgroups'])
+def groups(m):
+    toSend = ""
+    for key in groupsData.keys():
+        toSend += "*Grupo:* " + key
+        toSend += "\n  _Admin:_ " + str(groupsData[key]["admin"])
+        toSend += "\n  _Descripcion:_ " + str(groupsData[key]["description"]) + "\n\n"
+
+    bot.send_message(m.from_user.id, toSend, parse_mode="Markdown")
+        
 # @bot.message_handler(commands=['spam'])
 # def send_spam(message):
 #   if message.chat.type == 'private':

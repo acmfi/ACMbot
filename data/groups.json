@@ -1,0 +1,31 @@
+{
+    "ACM general": {
+	"admin": "@rockneurotiko",
+	"description": "Anarco Cuñadismo Mediterraneo."
+    },
+    
+    "Openlibra": {
+	"admin": "@SamRadioFloyd",
+	"description": "Grupo para compartir libros."
+    },
+    
+    "Emacs": {
+	"admin": "@rockneurotiko",
+	"description": "Grupo para aprender todo sobre Emacs."
+    },
+
+    "Sig Mobile Development": {
+	"admin": "@CesharPaste",
+	"description": "Grupo para aprender lo que se pueda de Android y desarrollo movil."
+    },
+
+    "Programacion Funcional": {
+	"admin": "@nachochete",
+	"description": "Grupo para aprender programacion funcional."
+    },
+
+    "[ACM] Telegram Bots": {
+	"admin": "@CesharPaste",
+	"description": "Grupo para aprender sobre bots de Telegram y como hacerlos."
+    }
+}
