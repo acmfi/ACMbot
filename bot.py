@@ -200,7 +200,7 @@ def new_challenge(message):
         bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
 
 
-@bot.message_handler(commands=['acmgroups'])
+@bot.message_handler(commands=['groupsinfo'])
 def groups(m):
     toSend = ""
     for key in groupsData.keys():
