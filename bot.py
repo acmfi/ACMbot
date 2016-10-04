@@ -1,7 +1,6 @@
 import sys
 import telebot
 import json
-# from TwitterAPI import TwitterAPI
 from telebot import types
 import os.path as path
 
@@ -42,12 +41,12 @@ def listener(messages):
             if m.chat.type == 'private':
                 print("Chat -> " + str(m.chat.first_name) +
                       " [" + str(m.chat.id) + "]: " + m.text)
-        else:
-            print("Group -> " + str(m.chat.title) +
-                  " [" + str(m.chat.id) + "]: " + m.text)
+            else:
+                print("Group -> " + str(m.chat.title) +
+                      " [" + str(m.chat.id) + "]: " + m.text)
 
 # Initializing listener
-#bot.set_update_listener(listener)
+bot.set_update_listener(listener)
 
 # Files used
 if not path.isfile("./data/data.json"):
