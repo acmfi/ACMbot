@@ -47,7 +47,7 @@ def listener(messages):
                   " [" + str(m.chat.id) + "]: " + m.text)
 
 # Initializing listener
-bot.set_update_listener(listener)
+#bot.set_update_listener(listener)
 
 # Files used
 if not path.isfile("./data/data.json"):
@@ -187,5 +187,11 @@ def groups(m):
 
     bot.send_message(m.from_user.id, toSend, parse_mode="Markdown")
 
+
+@bot.message_handler(content_types=['new_chat_member'])
+def welcome(m):
+    user = m.new_chat_member.username
+    bot.send_message(m.chat.id, "Bienvenido @" + user + " !!\nSoy el bot de ACM-UPM, puedes invocarme desde aquí poniendo /help@acmupm_bot o cualquier otro comando, pero te contestaré por privado. Para que pueda contestarte por privado manda a @acmupm_bot el comando /start directamente!")
+    
 # Start the bot
 bot.polling()
