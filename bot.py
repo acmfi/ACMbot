@@ -16,14 +16,6 @@ with open("./acm.token", "r") as TOKEN:
 # Ignorar mensajes antiguos
 bot.skip_pending = True
 
-# Authenticate on Twitter (@acmupm)
-# with open ("./data/.twitter.json") as twitter:
-#   t = json.load(twitter)
-#   consumerKey = t['ConsumerK']
-#   consumerSecret = t['ConsumerS']
-#   accessToken = t['AccessT']
-#   accessSecret = t['AccessS']
-
 # Functions used
 
 
@@ -56,9 +48,6 @@ def listener(messages):
 
 # Initializing listener
 bot.set_update_listener(listener)
-
-# Twitter login
-# api = TwitterAPI(consumerKey, consumerSecret, accessToken, accessSecret)
 
 # Files used
 if not path.isfile("./data/data.json"):
@@ -147,18 +136,6 @@ def send_events(message):
 def send_challenge(message):
     bot.send_message(message.from_user.id, "El reto de esta semana es:\n\n" + reto)
 
-
-@bot.message_handler(commands=['lmgtfy'])
-def send_lmgtfy(message):
-    lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split())
-    bot.send_message(message.from_user.id, lmgtfy_url)
-
-
-@bot.message_handler(commands=['tldr'])
-def send_tldr(message):
-    GIF = open('./data/tldr.mp4', 'rb')
-    bot.send_document(message.from_user.id, GIF)
-
 # Inline handler
 
 
@@ -209,18 +186,6 @@ def groups(m):
         toSend += "\n  _Descripcion:_ " + str(groupsData[key]["description"]) + "\n\n"
 
     bot.send_message(m.from_user.id, toSend, parse_mode="Markdown")
-        
-# @bot.message_handler(commands=['spam'])
-# def send_spam(message):
-#   if message.chat.type == 'private':
-#     if str(message.from_user.id) in admins.keys():
-#       text = message.text.split(' ', 1)[1]
-#       bot.send_message("@theIronChannel", text)
-#       r = api.request('statuses/update', {'status': text})
-#       print(r.status_code)
-#     else:
-#       bot.reply_to(message, "No eres un admin")
-#   else:
-#     bot.reply_to(message, "El spam solo se puede enviar por chat privado")
 
+# Start the bot
 bot.polling()
