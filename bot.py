@@ -120,44 +120,44 @@ print("Running...")
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, welcome)
+    bot.send_message(message.from_user.id, welcome)
 
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.reply_to(message, helpMessage)
+    bot.send_message(message.from_user.id, helpMessage)
 
 
 @bot.message_handler(commands=['quehaceacm'])
 def send_info(message):
-    bot.reply_to(message, info)
+    bot.send_message(message.from_user.id, info)
 
 
 @bot.message_handler(commands=['eventos'])
 def send_events(message):
     if events == '':
         GIF = open('./data/carlton.mp4', 'rb')
-        bot.send_message(message.chat.id, 'No hay eventos!')
-        bot.send_document(message.chat.id, GIF)
+        bot.send_message(message.from_user.id, 'No hay eventos!')
+        bot.send_document(message.from_user.id, GIF)
     else:
-        bot.reply_to(message, events)
+        bot.send_message(message.from_user.id, events)
 
 
 @bot.message_handler(commands=['reto'])
 def send_challenge(message):
-    bot.reply_to(message, "El reto de esta semana es:\n\n" + reto)
+    bot.send_message(message.from_user.id, "El reto de esta semana es:\n\n" + reto)
 
 
 @bot.message_handler(commands=['lmgtfy'])
 def send_lmgtfy(message):
     lmgtfy_url = "http://lmgtfy.com/?q=" + "+".join(message.text.split())
-    bot.reply_to(message, lmgtfy_url)
+    bot.send_message(message.from_user.id, lmgtfy_url)
 
 
 @bot.message_handler(commands=['tldr'])
 def send_tldr(message):
     GIF = open('./data/tldr.mp4', 'rb')
-    bot.send_document(message.chat.id, GIF)
+    bot.send_document(message.from_user.id, GIF)
 
 # Inline handler
 
