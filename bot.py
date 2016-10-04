@@ -188,7 +188,7 @@ def groups(m):
 
 
 @bot.message_handler(content_types=['new_chat_member'])
-def welcome(m):
+def send_welcome(m):
     user = m.new_chat_member.username
     bot.send_message(m.chat.id, "Bienvenido @" + user + " !!\nSoy el bot de ACM-UPM, puedes invocarme desde aquí poniendo /help@acmupm_bot o cualquier otro comando, pero te contestaré por privado. Para que pueda contestarte por privado manda a @acmupm_bot el comando /start directamente!")
     
