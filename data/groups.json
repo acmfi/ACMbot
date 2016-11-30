@@ -14,18 +14,58 @@
 	"description": "Grupo para aprender todo sobre Emacs."
     },
 
-    "Sig Mobile Development": {
+    "Mobile Development": {
 	"admin": "@CesharPaste",
 	"description": "Grupo para aprender lo que se pueda de Android y desarrollo movil."
     },
 
     "Programacion Funcional": {
-	"admin": "@nachochete",
+	"admin": "@ignaciobll",
 	"description": "Grupo para aprender programacion funcional."
     },
 
     "[ACM] Telegram Bots": {
 	"admin": "@CesharPaste",
 	"description": "Grupo para aprender sobre bots de Telegram y como hacerlos."
+    },
+
+    "[ACM] Le Musiqué": {
+	"admin": "@coyote3007",
+	"description": "Grupo para hablar sobre musica y compartirla con amor."
+    },
+
+    "[ACM-SIG] Python": {
+	"admin": "@ignaciobll",
+	"description": "Grupo del SIG de Python."
+    },
+
+    "[ACM-BOOKS] Them books": {
+	"admin": "@CesharPaste",
+	"description": "Si te gusta leer y compartir libros entra aqui!"
+    },
+
+    "[ACM] Salvemos el semestre": {
+	"admin": "@edububa",
+	"description": "Uno de los pocos grupos serios de ACM, creado para pedir ayuda sobre asignaturas de la FI"
+    },
+
+    "[ACM-SIG] Scala": {
+	"admin": "@Ashida",
+	"description": "Grupo del SIG de Scala"
+    },
+
+    "[ACM - 22] Cocina con Sardina": {
+	"admin": "@vvillar",
+	"description": "Si te gusta cocinar o quieres aprender aqui compartimos recetas!"
+    },
+
+    "[ACM] Le Politiqué": {
+	"admin": "@vvillar",
+	"description": "Discusiones sobre politica de manera gratuita!"
+    },
+
+    "[ACM] Le cinemá": {
+	"admin": "@vvillar",
+	"description": "Cines, series, por... digoooo esas cosas que se ven en Netflix."
     }
 }
