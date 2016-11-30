@@ -67,5 +67,10 @@
     "[ACM] Le cinemá": {
 	"admin": "@vvillar",
 	"description": "Cines, series, por... digoooo esas cosas que se ven en Netflix."
+    },
+
+    "[ACM-SIG] Cybersecurity": {
+	"admin": "@vvillar",
+	"description": "Sssshhhhh!! Pero esto va de seguridad informatica y otras cosas tope de tochas."
     }
 }
