@@ -192,5 +192,12 @@ def send_welcome_new(m):
     user = m.new_chat_member.username
     bot.send_message(m.chat.id, "Bienvenido @" + user + " !!\nSoy el bot de ACM-UPM, puedes invocarme desde aquí poniendo /help@acmupm_bot o cualquier otro comando, pero te contestaré por privado. Para que pueda contestarte por privado manda a @acmupm_bot el comando /start directamente!")
 
+
+@bot.message_handler(content_types=['left_chat_member'])
+def send_bye_left_user(m):
+    user = m.left_chat_member.username
+    bot.send_message(m.chat.id, "Gracias por pasar @" + user + "!!\nEs una pena, siempre saludaba... ")
+    
+    
 # Start the bot
 bot.polling()
