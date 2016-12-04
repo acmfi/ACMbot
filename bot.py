@@ -195,8 +195,15 @@ def send_welcome_new(m):
 
 @bot.message_handler(content_types=['left_chat_member'])
 def send_bye_left_user(m):
-    user = m.left_chat_member.username
-    bot.send_message(m.chat.id, "Gracias por pasar @" + user + "!!\nEs una pena, siempre saludaba... ")
+    left_user = m.left_chat_member
+    #user =  ("@" + left_user.username) if hasattr(left_user, 'username') else (left_user.name)
+    if hasattr(left_user, 'username'):
+        user = "@" + left_user.username
+    else:
+        user = left_user.name
+    bot.send_message(m.chat.id, "Gracias por pasar " + user + "!!\nEs una pena, siempre saludaba...")
+    #bot.send_message(left_user.id, "Gracias por pasarte por el grupo de ACM!!\nEsperarmos volver a verte pronto.")
+    
     
     
 # Start the bot
