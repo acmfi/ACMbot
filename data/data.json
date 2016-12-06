@@ -5,5 +5,6 @@
     "especiales": "- Pizza congelada -> 3.00\u20ac\n- Pizza fresca -> 3.00\u20ac\n- Caf\u00e9 (sin vaso ni cucharilla) -> 0.50\u20ac\n- Caf\u00e9 (con vaso y cucharilla) -> 0.65\u20ac\n- Nesquick (Sin vaso) 0.40\u20ac\n- Nesquick (Con vaso) 0.55\u20ac\n- T\u00e9 (Sin vaso) 0.20\u20ac\n- T\u00e9 (Con vaso) 0.35\u20ac",
     "comida": "- Palomitas Sal -> 0.40\u20ac\n- Palomitas Mantequilla -> 0.60\u20ac\n- Palomitas Dulces -> 0.70\u20ac\n- Kit kat -> 0.40\u20ac\n- Kinder Bueno -> 0.70\u20ac\n- Donuts -> 0.50\u20ac\n- Picotas -> 0.05\u20ac\n- Regaliz -> 0.05\u20ac\n- Oreo -> 0.50\u20ac\n- Ensaimadas -> 0.20\u20ac\n- Croisants -> 0.20\u20ac\n- Conchas -> 0.30\u20ac\n- Patatas -> 1.00\u20ac\n- Chips Ahoy -> 0.50\u20ac\n- Dinosaurios -> 0.30\u20ac\n- Dinosaurios Choco -> 0.40\u20ac\n- Barritas Energ\u00e9ticas -> 0.25\u20ac\n- Mini Chocolatinas -> 0.20\u20ac",
     "reto": "https://redd.it/3yiy2d",
-    "bienvenida": "Hola! Te damos la bienvenida al bot de ACM.\n\nPuedes empezar diciendo /quehaceacm para conocernos un poco mas o probar con /help para descubrir todo lo que este bot puede ofrecer."
+    "bienvenida": "Hola! Te damos la bienvenida al bot de ACM.\n\nPuedes empezar diciendo /quehaceacm para conocernos un poco mas o probar con /help para descubrir todo lo que este bot puede ofrecer.",
+    "botPresentationInGroup": "Soy el bot de ACM-UPM, puedes invocarme desde aquí poniendo /help@acmupm_bot o cualquier otro comando, pero te contestaré por privado. Para que pueda contestarte por privado manda a @acmupm_bot el comando /start directamente!"
 }

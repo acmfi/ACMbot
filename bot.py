@@ -60,6 +60,8 @@ with open('./data/data.json', 'r') as data:
     info = j['info']
     global welcome
     welcome = j['bienvenida']
+    global botPresentationInGroup
+    botPresentationInGroup = j['botPresentationInGroup']
     global events
     events = j['events']
     global reto
@@ -188,16 +190,16 @@ def groups(m):
 @bot.message_handler(content_types=['new_chat_member'])
 def send_welcome_new(m):
     user = "@" + m.new_chat_member.username if hasattr(m.new_chat_member, 'username') else m.new_chat_member.name
-    bot.send_message(m.chat.id, "Bienvenido " + user + " !!\nSoy el bot de ACM-UPM, puedes invocarme desde aquí poniendo /help@acmupm_bot o cualquier otro comando, pero te contestaré por privado. Para que pueda contestarte por privado manda a @acmupm_bot el comando /start directamente!")
+    bot.send_message(m.chat.id, "Bienvenido " + user + " !!\n" + botPresentationInGroup)
 
 
 @bot.message_handler(content_types=['left_chat_member'])
 def send_bye_left_user(m):
     left_user = m.left_chat_member
     user =  ("@" + left_user.username) if hasattr(left_user, 'username') else (left_user.name)
-    bot.send_message(m.chat.id, "Gracias por pasar " + user + "!!\nEs una pena, siempre saludaba...")    
-    #bot.send_message(left_user.id, "Gracias por pasarte por el grupo de ACM!!\nEsperarmos volver a verte pronto.")        
-    
+    bot.send_message(m.chat.id, "Gracias por pasar " + user + "!!\nEs una pena, siempre saludaba...")
+    #bot.send_message(left_user.id, "Gracias por pasarte por el grupo de ACM!!\nEsperarmos volver a verte pronto.")
+
 # Start the bot
 print("Running...")
 bot.polling()
