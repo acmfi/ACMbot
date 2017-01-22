@@ -3,12 +3,12 @@
 	"admin": "@rockneurotiko",
 	"description": "Anarco Cuñadismo Mediterraneo."
     },
-    
+
     "Openlibra": {
 	"admin": "@SamRadioFloyd",
 	"description": "Grupo para compartir libros."
     },
-    
+
     "Emacs": {
 	"admin": "@rockneurotiko",
 	"description": "Grupo para aprender todo sobre Emacs."
@@ -34,29 +34,9 @@
 	"description": "Grupo para hablar sobre musica y compartirla con amor."
     },
 
-    "[ACM-SIG] Python": {
-	"admin": "@ignaciobll",
-	"description": "Grupo del SIG de Python."
-    },
-
-    "[ACM-BOOKS] Them books": {
-	"admin": "@CesharPaste",
-	"description": "Si te gusta leer y compartir libros entra aqui!"
-    },
-
     "[ACM] Salvemos el semestre": {
 	"admin": "@edububa",
 	"description": "Uno de los pocos grupos serios de ACM, creado para pedir ayuda sobre asignaturas de la FI"
-    },
-
-    "[ACM-SIG] Scala": {
-	"admin": "@Ashida",
-	"description": "Grupo del SIG de Scala"
-    },
-
-    "[ACM - 22] Cocina con Sardina": {
-	"admin": "@vvillar",
-	"description": "Si te gusta cocinar o quieres aprender aqui compartimos recetas!"
     },
 
     "[ACM] Le Politiqué": {
@@ -69,8 +49,33 @@
 	"description": "Cines, series, por... digoooo esas cosas que se ven en Netflix."
     },
 
+    "[ACM] Google Hash Code 2017": {
+	"admin": "@vvillar",
+	"description": "Para participar en la Google Hash Code 2017. Info https://goo.gl/U8h5qF"
+    },
+
+    "[ACM-BOOKS] Them books": {
+	"admin": "@CesharPaste",
+	"description": "Si te gusta leer y compartir libros entra aqui!"
+    },
+
+    "[ACM-SIG] Python": {
+	"admin": "@ignaciobll",
+	"description": "Grupo del SIG de Python."
+    },
+
+    "[ACM-SIG] Scala": {
+	"admin": "@Ashida",
+	"description": "Grupo del SIG de Scala"
+    },
+
     "[ACM-SIG] Cybersecurity": {
 	"admin": "@vvillar",
 	"description": "Sssshhhhh!! Pero esto va de seguridad informatica y otras cosas tope de tochas."
+    },
+
+    "[ACM - 22] Cocina con Sardina": {
+    "admin": "@vvillar",
+    "description": "Si te gusta cocinar o quieres aprender aqui compartimos recetas!"
     }
 }
