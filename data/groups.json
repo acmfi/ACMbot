@@ -54,6 +54,11 @@
 	"description": "Para participar en la Google Hash Code 2017. Info https://goo.gl/U8h5qF"
     },
 
+    "[ACM] Viajeros": {
+	"admin": "@Inquiristor",
+	"description": "Grupo para organizar escapadas y viajes culturales"
+    },
+
     "[ACM-BOOKS] Them books": {
 	"admin": "@CesharPaste",
 	"description": "Si te gusta leer y compartir libros entra aqui!"
