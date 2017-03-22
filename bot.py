@@ -144,6 +144,27 @@ def send_events(message):
 def send_challenge(message):
     bot.send_message(message.from_user.id, "El reto de esta semana es:\n\n" + reto)
 
+
+@bot.message_handler(commands=['junta'])
+def send_junta(message):
+    juntaStr = "*Junta:*\n"
+    for position in juntaData.keys():
+        juntaStr += "\t\t*" + position + "*\n"
+        for info in juntaData[position].keys():
+            t = type(juntaData[position][info])
+            if t is OrderedDict:
+                juntaStr += "\t\t\t\t*" + info + "*\n"
+                for member in juntaData[position][info].keys():
+                    juntaStr += "\t\t\t\t\t\t_" + member + ":_\n"
+                    for memberInfo in juntaData[position][info][member].keys():
+                        if "id" not in memberInfo:
+                            juntaStr += "\t\t\t\t\t\t\t\t_" + memberInfo + ":_  " + str(juntaData[position][info][member][memberInfo]) + "\n"
+            else:
+                juntaStr += "\t\t\t\t_" + info + ":_  " + str(juntaData[position][info]) + "\n"
+        juntaStr += "\n"
+    toSend = "La composición de la junta de ACM es:\n\n" + juntaStr + "\n\n"
+    bot.send_message(message.from_user.id, toSend, parse_mode="Markdown")
+
 # Inline handler
 
 
