@@ -5,5 +5,6 @@
     "precios":"Si quieres comer algo, necesitarás saber cuánto cuesta",
     "eventos":"Muestra los eventos actuales en ACM",
     "reto":"¿Quieres hacer algún reto de programación?",
-    "junta":"Mostrar los miembros de la junta"
+    "junta":"Mostrar los miembros de la junta",
+    "juntaPing":"Avisar a los miembros de la junta"
 }

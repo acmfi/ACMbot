@@ -165,6 +165,43 @@ def send_junta(message):
     toSend = "La composición de la junta de ACM es:\n\n" + juntaStr + "\n\n"
     bot.send_message(message.from_user.id, toSend, parse_mode="Markdown")
 
+
+@bot.message_handler(commands=['juntaPing'])
+def ping_junta(message):
+    user_msg = message.from_user
+    userId = message.from_user.id
+    user = ("@" + user_msg.username) if hasattr(user_msg, 'username') else (user_msg.name)
+
+    msg2junta = ""
+    if len(message.text.split(' ', 1)) > 1:
+        msg2junta = message.text.split(' ', 1)[1]
+
+    membersToPing = []
+    for position in juntaData.keys():
+        for info in juntaData[position].keys():
+            t = type(juntaData[position][info])
+            if t is OrderedDict:
+                for member in juntaData[position][info].keys():
+                    for memberInfo in juntaData[position][info][member].keys():
+                        if "id" in memberInfo:
+                            if juntaData[position][info][member][memberInfo] not in membersToPing:
+                                membersToPing.append(juntaData[position][info][member][memberInfo])
+
+    toSend = "El usuario: " + user
+    #toSend += " , con id: " + str(userId)
+    if msg2junta != "":
+        toSend += " envió este mensaje para la junta:\n"
+        toSend += "---------------------------\n"
+        toSend += msg2junta
+        toSend += "\n---------------------------\n" + "Fin del mensaje."
+    else:
+        toSend += " dió un toque a la junta"
+    toSend += "\n\n"
+
+    for member in membersToPing:
+        bot.send_message(member, toSend, parse_mode="Markdown")
+
+
 # Inline handler
 
 
