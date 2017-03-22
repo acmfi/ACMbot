@@ -3,6 +3,7 @@ import telebot
 import json
 from telebot import types
 import os.path as path
+from collections import OrderedDict
 
 # Create bot with its token
 if not path.isfile("acm.token"):
@@ -89,6 +90,14 @@ if not path.isfile("./data/help.json"):
 
 with open('./data/help.json', 'r') as leHelp:
     helpData = json.load(leHelp)
+
+if not path.isfile("./data/junta.json"):
+    with open('./data/junta.json', 'w') as junta:
+        junta.write('{}')
+        junta.close
+
+with open('./data/junta.json', 'r') as junta:
+    juntaData = json.load(junta, object_pairs_hook=OrderedDict)
 
 helpMessage = "Estos son los comandos disponibles:\n\n"
 for key in helpData:
