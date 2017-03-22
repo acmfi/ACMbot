@@ -3,6 +3,7 @@ import telebot
 import json
 from telebot import types
 import os.path as path
+from collections import OrderedDict
 
 # Create bot with its token
 if not path.isfile("acm.token"):
@@ -90,6 +91,14 @@ if not path.isfile("./data/help.json"):
 with open('./data/help.json', 'r') as leHelp:
     helpData = json.load(leHelp)
 
+if not path.isfile("./data/junta.json"):
+    with open('./data/junta.json', 'w') as junta:
+        junta.write('{}')
+        junta.close
+
+with open('./data/junta.json', 'r') as junta:
+    juntaData = json.load(junta, object_pairs_hook=OrderedDict)
+
 helpMessage = "Estos son los comandos disponibles:\n\n"
 for key in helpData:
     helpMessage += "- /" + key + " :: "
@@ -134,6 +143,63 @@ def send_events(message):
 @bot.message_handler(commands=['reto'])
 def send_challenge(message):
     bot.send_message(message.from_user.id, "El reto de esta semana es:\n\n" + reto)
+
+
+@bot.message_handler(commands=['junta'])
+def send_junta(message):
+    juntaStr = "*Junta:*\n"
+    for position in juntaData.keys():
+        juntaStr += "\t\t*" + position + "*\n"
+        for info in juntaData[position].keys():
+            t = type(juntaData[position][info])
+            if t is OrderedDict:
+                juntaStr += "\t\t\t\t*" + info + "*\n"
+                for member in juntaData[position][info].keys():
+                    juntaStr += "\t\t\t\t\t\t_" + member + ":_\n"
+                    for memberInfo in juntaData[position][info][member].keys():
+                        if "id" not in memberInfo:
+                            juntaStr += "\t\t\t\t\t\t\t\t_" + memberInfo + ":_  " + str(juntaData[position][info][member][memberInfo]) + "\n"
+            else:
+                juntaStr += "\t\t\t\t_" + info + ":_  " + str(juntaData[position][info]) + "\n"
+        juntaStr += "\n"
+    toSend = "La composición de la junta de ACM es:\n\n" + juntaStr + "\n\n"
+    bot.send_message(message.from_user.id, toSend, parse_mode="Markdown")
+
+
+@bot.message_handler(commands=['juntaPing'])
+def ping_junta(message):
+    user_msg = message.from_user
+    userId = message.from_user.id
+    user = ("@" + user_msg.username) if hasattr(user_msg, 'username') else (user_msg.name)
+
+    msg2junta = ""
+    if len(message.text.split(' ', 1)) > 1:
+        msg2junta = message.text.split(' ', 1)[1]
+
+    membersToPing = []
+    for position in juntaData.keys():
+        for info in juntaData[position].keys():
+            t = type(juntaData[position][info])
+            if t is OrderedDict:
+                for member in juntaData[position][info].keys():
+                    for memberInfo in juntaData[position][info][member].keys():
+                        if "id" in memberInfo and juntaData[position][info][member][memberInfo] not in membersToPing:
+                            membersToPing.append(juntaData[position][info][member][memberInfo])
+
+    toSend = "El usuario: " + user
+    #toSend += " , con id: " + str(userId)
+    if msg2junta != "":
+        toSend += " envió este mensaje para la junta:\n"
+        toSend += "---------------------------\n"
+        toSend += msg2junta
+        toSend += "\n---------------------------\n" + "Fin del mensaje."
+    else:
+        toSend += " dió un toque a la junta"
+    toSend += "\n\n"
+
+    for member in membersToPing:
+        bot.send_message(member, toSend, parse_mode="Markdown")
+
 
 # Inline handler
 

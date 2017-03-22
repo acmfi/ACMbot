@@ -4,6 +4,7 @@
 # Sensitive info #
 .twitter.json
 admins.json
+junta.json
 
 # Emacs stuff #
 \#*\#
