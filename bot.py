@@ -183,9 +183,8 @@ def ping_junta(message):
             if t is OrderedDict:
                 for member in juntaData[position][info].keys():
                     for memberInfo in juntaData[position][info][member].keys():
-                        if "id" in memberInfo:
-                            if juntaData[position][info][member][memberInfo] not in membersToPing:
-                                membersToPing.append(juntaData[position][info][member][memberInfo])
+                        if "id" in memberInfo and juntaData[position][info][member][memberInfo] not in membersToPing:
+                            membersToPing.append(juntaData[position][info][member][memberInfo])
 
     toSend = "El usuario: " + user
     #toSend += " , con id: " + str(userId)
