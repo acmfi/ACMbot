@@ -13,6 +13,9 @@ junta.json
 
 telegram_token
 
+# Docker log file #
+container.log
+
 # Python reglas #
 # Byte-compiled / optimized / DLL files
 __pycache__/
