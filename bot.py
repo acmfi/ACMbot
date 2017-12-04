@@ -1,13 +1,48 @@
+import os
+import os.path as path
 import sys
 import telebot
-import json
 from telebot import types
-import os.path as path
+import json
 from collections import OrderedDict
+import logging
+from logging import config
+import coloredlogs
+
+
+# Create a logger object.
+def setup_logging(
+    default_path='logging_conf.json',
+    default_level=logging.INFO,
+    env_key='LOG_CFG'
+):
+
+    logging.basicConfig(level=default_level)
+    FORMAT = ""
+
+    path = default_path
+    value = os.getenv(env_key, None)
+    if value:
+        path = value
+    if os.path.exists(path):
+        with open(path, 'rt') as f:
+            config = json.load(f)
+            FORMAT = config["formatters"]["verbose"]["format"]
+            os.environ["COLOREDLOGS_LOG_FORMAT"] = FORMAT
+        logging.config.dictConfig(config)
+
+    logger = logging.getLogger("ACMBot")
+    coloredlogs.install(level=default_level, logger=logger)
+
+    return logger
+
+
+logger = setup_logging()
+
 
 # Create bot with its token
 if not path.isfile("acm.token"):
-    print("Error: \"acm.token\" not found!")
+    logger.warning("Error: \"acm.token\" not found!")
     sys.exit()
 
 with open("./acm.token", "r") as TOKEN:
@@ -40,10 +75,10 @@ def listener(messages):
         if m.content_type == 'text':
             # Prints the sent message to the console
             if m.chat.type == 'private':
-                print("Chat -> " + str(m.chat.first_name) +
+                logger.info("Chat -> " + str(m.chat.first_name) +
                       " [" + str(m.chat.id) + "]: " + m.text)
             else:
-                print("Group -> " + str(m.chat.title) +
+                logger.info("Group -> " + str(m.chat.title) +
                       " [" + str(m.chat.id) + "]: " + m.text)
 
 # Initializing listener
@@ -218,7 +253,7 @@ def precios_inline(iq):
 def auto_update(message):
     if isAdmin_fromPrivate(message):
         bot.reply_to(message, "Reiniciando..\n\nPrueba algun comando en 10 segundos")
-        print("Updating..")
+        logger.info("Updating..")
         sys.exit()
     else:
         bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
@@ -232,12 +267,12 @@ def new_challenge(message):
         with open('./data/data.json', 'w') as dataW:
             dataW.write(json.dumps(j))
         bot.reply_to(message, "El nuevo reto es:\n\n" + url_reto)
-        print("Updating..")
+        logger.info("Updating..")
         with open('./data/data.json', 'r') as data:
             j2 = json.load(data)
             global reto
             reto = j2['reto']
-        print("Updated")
+        logger.info("Updated")
     else:
         bot.reply_to(message, "Este comando es solo para admins y debe ser enviado por privado")
 
@@ -267,5 +302,5 @@ def send_bye_left_user(m):
     #bot.send_message(left_user.id, "Gracias por pasarte por el grupo de ACM!!\nEsperarmos volver a verte pronto.")
 
 # Start the bot
-print("Running...")
+logger.info("Running...")
 bot.polling()
