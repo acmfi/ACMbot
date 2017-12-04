@@ -17,6 +17,9 @@ junta.json
 # log file #
 logger.log
 
+# Docker log file #
+container.log
+
 # Python reglas #
 # Byte-compiled / optimized / DLL files
 __pycache__/
