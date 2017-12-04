@@ -1,0 +1,2 @@
+pyTelegramBotAPI==2.3.1
+coloredlogs==6.0

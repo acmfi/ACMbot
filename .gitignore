@@ -11,7 +11,11 @@ junta.json
 *~
 .#*
 
-telegram_token
+# PyCharm stuff #
+.idea/
+
+# log file #
+logger.log
 
 # Python reglas #
 # Byte-compiled / optimized / DLL files
