@@ -1,3 +1,0 @@
-¡Hola! Te damos la bienvenida al bot de ACM.
-
-Puedes empezar diciendo /quehaceacm para conocernos un poco más o probar con /help para descubrir todo lo que este bot puede ofrecer.
